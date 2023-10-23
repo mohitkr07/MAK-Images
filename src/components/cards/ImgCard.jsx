@@ -1,17 +1,87 @@
-import React from 'react';
-import {StyleSheet} from 'react-native';
-import {Image, Text, View, TouchableOpacity} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {PermissionsAndroid, StyleSheet} from 'react-native';
+import {Image, Text, View, TouchableOpacity, Platform} from 'react-native';
+import {colors} from '../../constants/color';
 
+import RNFetchBlob from 'rn-fetch-blob';
 
-const ImgCard = () => {
-  const handleButtonPress = () => {
-    console.log('Button Pressed');
+const ImgCard = props => {
+  const [imageUrl, setImageUrl] = useState(props.download);
+
+  useEffect(()=>{
+    setImageUrl(props.download)
+  },[props.download])
+
+  // const checkPermission = async () => {
+  //   if (Platform.OS === 'ios') {
+  //     downloadImage();
+  //   } else {
+  //     try {
+  //       const granted = await PermissionsAndroid.request(
+  //         PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
+  //         {
+  //           title: 'Storage Permission Required',
+  //           message: 'App needs access to your storage to download Photos',
+  //         },
+  //       );
+  //       if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+  //         // Once user grant the permission start downloading
+  //         console.log('Storage Permission Granted.');
+  //         downloadImage();
+  //       } else {
+  //         // If permission denied then show alert
+  //         alert('Storage Permission Not Granted');
+  //       }
+  //     } catch (err) {
+  //       // To handle permission related exception
+  //       console.warn(err);
+  //     }
+  //   }
+  // };
+
+  const downloadImage = () => {
+    let date = new Date();
+
+    let ext = getExtention(imageUrl);
+
+    const {config, fs} = RNFetchBlob;
+
+    let PictureDir = fs.dirs.PictureDir;
+
+    let options = {
+      fileCache: true,
+      addAndroidDownloads: {
+        // Related to the Android only
+        useDownloadManager: true,
+        notification: true,
+        path:
+          PictureDir +
+          '/image_' +
+          Math.floor(date.getTime() + date.getSeconds() / 2) +
+          ext,
+        description: 'Image',
+      },
+    };
+    config(options)
+      .fetch('GET', imageUrl)
+      .then(res => {
+        // Showing alert after successful downloading
+        console.log('res -> ', JSON.stringify(res));
+        alert('Image Downloaded Successfully.');
+      });
   };
+
+  const getExtention = filename => {
+    // To get the file extension
+    // return /[.]/.exec(filename) ? /[^.]+$/.exec(filename) : '.jpg';
+    return '.jpg';
+  };
+
   return (
     <View style={cardStyles.container}>
       <View style={cardStyles.imgDisp}>
         <Image
-          source={require('../Images/5.jpg')}
+          source={{uri: props.URL}}
           style={{
             width: '100%',
             height: '100%',
@@ -24,28 +94,28 @@ const ImgCard = () => {
           <Text style={{marginRight: 4}}>500</Text>
           <Text>Downloads</Text>
         </View>
-        <TouchableOpacity onPress={handleButtonPress} style={cardStyles.button}>
-          <Text style={cardStyles.buttonText}>Custom Button</Text>
+        <TouchableOpacity onPress={downloadImage} style={cardStyles.button}>
+          <Text style={{}}>Download</Text>
         </TouchableOpacity>
       </View>
     </View>
   );
 };
 
-export const cardStyles = StyleSheet.create({
+const cardStyles = StyleSheet.create({
   container: {
-    width: '90%',
     backgroundColor: '#fff',
+    marginTop: 15,
   },
   imgDisp: {
     width: '100%',
     overflow: 'scroll',
-    maxHeight: 300,
+    height: 206,
   },
   imgDetails: {
     width: '100%',
     height: 60,
-    backgroundColor: 'grey',
+    backgroundColor: colors.subBg,
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -58,11 +128,11 @@ export const cardStyles = StyleSheet.create({
   },
   button: {
     width: 150,
-    height: '95%',
+    height: '85%',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'red',
+    backgroundColor: colors.button,
   },
 });
 

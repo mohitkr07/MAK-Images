@@ -5,24 +5,38 @@ import ImgCard from './cards/ImgCard';
 
 import axios from 'axios';
 
-const Feed = () => {
+const Search = ({route, navigation}) => {
+    
+  const {Param} = route.params;
+
   const [data, setData] = useState();
   const [page, setPage] = useState(1);
 
-  useEffect(() => {
-    FetchData(page);
-  }, [page]);
-  
 
-  const FetchData = async currPage => {
+    // const [query, setQuery] = useState(Param);
+
+    // useEffect(() => {
+    //   setQuery(Param);
+    // }, [page, Param]);
+
+    // useEffect(() => {
+    //   if (query) {
+    //     FetchData(page, query);
+    //   }
+    // }, [page, query]);
+
+    useEffect(()=>{
+        FetchData(page, Param);
+    },[page, Param])
+
+  const FetchData = async (currPage, search) => {
     try {
-      const url = `https://api.unsplash.com/photos?page=${currPage}&client_id=56AdQzhmUDi3e4eJXdfKEUUfmW9lSpYzAampuJy0mRs`;
+      const url = `https://api.unsplash.com/search/photos?query=${search}&page=${currPage}&client_id=56AdQzhmUDi3e4eJXdfKEUUfmW9lSpYzAampuJy0mRs`;
 
       const response = await axios.get(url);
 
       if (response.status === 200) {
-        const resData = response.data;
-        
+        const resData = response.data.results;
         setData(resData);
       }
     } catch (error) {
@@ -44,7 +58,14 @@ const Feed = () => {
       {data && (
         <View style={feedStyles.container}>
           {data.map((item, index) => {
-            return <ImgCard key={index} URL={item.urls.regular} download={item.urls.full} name={item.slug} />;
+            return (
+              <ImgCard
+                key={index}
+                URL={item.urls.regular}
+                download={item.urls.full}
+                name={item.slug}
+              />
+            );
           })}
         </View>
       )}
@@ -57,9 +78,7 @@ const Feed = () => {
           justifyContent: 'center',
         }}>
         {page > 1 && (
-          <TouchableOpacity
-            onPress={handlePrev}
-            style={feedStyles.loadButton}>
+          <TouchableOpacity onPress={handlePrev} style={feedStyles.loadButton}>
             <Text style={{color: '#fff'}}>Prev</Text>
           </TouchableOpacity>
         )}
@@ -96,4 +115,4 @@ const feedStyles = StyleSheet.create({
   },
 });
 
-export default Feed;
+export default Search;
