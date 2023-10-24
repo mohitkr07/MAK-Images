@@ -7,6 +7,16 @@
 ## Introduction
 
 Welcome to the HD Image Search and Download App! This native mobile application is designed to help you discover and download high-definition images right to your mobile device.
+## Screenshots
+
+<div align="center" style="display: flex; justify-content: center; flex-wrap: wrap; gap: 20px;">
+  <img src="./resources/screenshots/6.png" height="500">
+  <img src="./resources/screenshots/7.png" height="500">
+  <img src="./resources/screenshots/8.png" height="500">
+  <img src="./resources/screenshots/9.png" height="500">
+  <img src="./resources/screenshots/10.png" height="500">
+</div>
+
 ## Features
 
 - **High-Quality Image Search:** Effortlessly search for images in HD quality to find the perfect visuals for your projects or personal use.
@@ -87,16 +97,6 @@ Run the below command in order to bundle the application and run on physical or 
 ```bash
   npm run android
 ```
-## Screenshots
-
-<div align="center" style="display: flex; justify-content: center; flex-wrap: wrap; gap: 20px;">
-  <img src="./resources/screenshots/6.png" height="500">
-  <img src="./resources/screenshots/7.png" height="500">
-  <img src="./resources/screenshots/8.png" height="500">
-  <img src="./resources/screenshots/9.png" height="500">
-  <img src="./resources/screenshots/10.png" height="500">
-</div>
-
 ## Authors
 
 - [@mohitkr07](https://www.github.com/mohitkr07)
