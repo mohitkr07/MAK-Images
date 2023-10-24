@@ -97,3 +97,7 @@ Run the below command in order to bundle the application and run on physical or 
   <img src="./resources/screenshots/10.png" height="500">
 </div>
 
+## Authors
+
+- [@mohitkr07](https://www.github.com/mohitkr07)
+
