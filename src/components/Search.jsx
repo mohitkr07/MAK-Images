@@ -6,6 +6,8 @@ import ImgCard from './cards/ImgCard';
 import axios from 'axios';
 import {colors} from '../constants/color';
 
+import config from '../../config';
+
 const Search = ({route, navigation}) => {
   const {Param} = route.params;
 
@@ -19,7 +21,7 @@ const Search = ({route, navigation}) => {
 
   const FetchData = async (currPage, search) => {
     try {
-      const url = `https://api.unsplash.com/search/photos?query=${search}&page=${currPage}&client_id=56AdQzhmUDi3e4eJXdfKEUUfmW9lSpYzAampuJy0mRs`;
+      const url = `https://api.unsplash.com/search/photos?query=${search}&page=${currPage}&client_id=${config.API_KEY}`;
 
       const response = await axios.get(url);
 

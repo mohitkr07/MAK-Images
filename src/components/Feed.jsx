@@ -4,6 +4,7 @@ import {View, ScrollView, Text} from 'react-native';
 import ImgCard from './cards/ImgCard';
 import {colors} from '../constants/color';
 import axios from 'axios';
+import config from '../../config';
 
 const Feed = () => {
   const [data, setData] = useState();
@@ -16,7 +17,7 @@ const Feed = () => {
 
   const FetchData = async currPage => {
     try {
-      const url = `https://api.unsplash.com/photos?page=${currPage}&client_id=56AdQzhmUDi3e4eJXdfKEUUfmW9lSpYzAampuJy0mRs`;
+      const url = `https://api.unsplash.com/photos?page=${currPage}&client_id=${config.API_KEY}`;
 
       const response = await axios.get(url);
 
