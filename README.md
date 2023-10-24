@@ -86,8 +86,6 @@ Run the below command in order to bundle the application and run on physical or 
 
 ## Screenshots
 
-## Screenshots
-
 <div style="display: flex; flex-wrap: wrap; gap: 20px;">
   <img src="./resources/screenshots/6.png" height="500">
   <img src="./resources/screenshots/7.png" height="500">
