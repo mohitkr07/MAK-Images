@@ -86,4 +86,4 @@ Run the below command in order to bundle the application and run on physical or 
 
 ## Screenshots
 
-![View Screenshots](./screenshots.html)
+[View Screenshots](./screenshots.html)
