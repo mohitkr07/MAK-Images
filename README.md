@@ -89,7 +89,7 @@ Run the below command in order to bundle the application and run on physical or 
 ```
 ## Screenshots
 
-<div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 20px;">
+<div align="center" style="display: flex; justify-content: center; flex-wrap: wrap; gap: 20px;">
   <img src="./resources/screenshots/6.png" height="500">
   <img src="./resources/screenshots/7.png" height="500">
   <img src="./resources/screenshots/8.png" height="500">
