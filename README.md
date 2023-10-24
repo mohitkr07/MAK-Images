@@ -89,9 +89,10 @@ Run the below command in order to bundle the application and run on physical or 
 ```
 ## Screenshots
 
-![App Start](./resources/screenshots/1.jpg)
-![Home](./resources/screenshots/2.jpg)
-![Search](./resources/screenshots/3.jpg)
-![Search Result](./resources/screenshots/4.jpg)
-![Bottom](./resources/screenshots/5.jpg)
+<img src="./resources/screenshots/1.jpg" height="500">
+<img src="./resources/screenshots/2.jpg" height="500">
+<img src="./resources/screenshots/3.jpg" height="500">
+<img src="./resources/screenshots/4.jpg" height="500">
+<img src="./resources/screenshots/5.jpg" height="500">
+
 
