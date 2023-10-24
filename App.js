@@ -21,10 +21,6 @@ const App = () => {
     setSearchText(Text);
   };
 
-  const onSubmit = () => {
-    InputSubmit(searchText);
-  };
-
   return (
     <NavigationContainer>
       <Stack.Navigator>
@@ -34,7 +30,9 @@ const App = () => {
           options={({navigation, route}) => ({
             title: 'MAK Images',
             headerStyle: {backgroundColor: colors.nav},
+            headerTitleStyle: {fontSize: 17},
             headerTintColor: '#fff',
+
             headerRight: () => (
               <TextInput
                 style={{

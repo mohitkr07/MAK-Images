@@ -8,9 +8,9 @@ import RNFetchBlob from 'rn-fetch-blob';
 const ImgCard = props => {
   const [imageUrl, setImageUrl] = useState(props.download);
 
-  useEffect(()=>{
-    setImageUrl(props.download)
-  },[props.download])
+  useEffect(() => {
+    setImageUrl(props.download);
+  }, [props.download]);
 
   // const checkPermission = async () => {
   //   if (Platform.OS === 'ios') {
@@ -91,8 +91,10 @@ const ImgCard = props => {
       </View>
       <View style={cardStyles.imgDetails}>
         <View style={cardStyles.imgLikes}>
-          <Text style={{marginRight: 4}}>500</Text>
-          <Text>Downloads</Text>
+          <Text style={{marginRight: 4, color: colors.bodyBackground}}>
+            {props.likes}
+          </Text>
+          <Text style={{color: colors.bodyBackground}}>Likes</Text>
         </View>
         <TouchableOpacity onPress={downloadImage} style={cardStyles.button}>
           <Text style={{}}>Download</Text>
@@ -104,18 +106,20 @@ const ImgCard = props => {
 
 const cardStyles = StyleSheet.create({
   container: {
-    backgroundColor: '#fff',
+    backgroundColor: colors.subBg,
     marginTop: 15,
+    borderRadius: 5,
   },
   imgDisp: {
     width: '100%',
     overflow: 'scroll',
     height: 206,
+    borderTopLeftRadius: 5,
+    borderTopRightRadius: 5,
   },
   imgDetails: {
     width: '100%',
     height: 60,
-    backgroundColor: colors.subBg,
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -133,6 +137,7 @@ const cardStyles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: colors.button,
+    borderRadius: 5,
   },
 });
 

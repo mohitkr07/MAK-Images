@@ -2,17 +2,17 @@ import React, {useState, useEffect, useRef} from 'react';
 import {StyleSheet, TouchableOpacity} from 'react-native';
 import {View, ScrollView, Text} from 'react-native';
 import ImgCard from './cards/ImgCard';
-
+import {colors} from '../constants/color';
 import axios from 'axios';
 
 const Feed = () => {
   const [data, setData] = useState();
   const [page, setPage] = useState(1);
+  const scrollViewRef = useRef();
 
   useEffect(() => {
     FetchData(page);
   }, [page]);
-  
 
   const FetchData = async currPage => {
     try {
@@ -22,8 +22,8 @@ const Feed = () => {
 
       if (response.status === 200) {
         const resData = response.data;
-        
         setData(resData);
+        scrollViewRef.current.scrollTo({y: 0, animated: true});
       }
     } catch (error) {
       console.error('Error fetching data: ', error);
@@ -40,11 +40,21 @@ const Feed = () => {
   };
 
   return (
-    <ScrollView>
+    <ScrollView
+      style={{backgroundColor: colors.bodyBackground}}
+      ref={scrollViewRef}>
       {data && (
         <View style={feedStyles.container}>
           {data.map((item, index) => {
-            return <ImgCard key={index} URL={item.urls.regular} download={item.urls.full} name={item.slug} />;
+            return (
+              <ImgCard
+                key={index}
+                URL={item.urls.regular}
+                download={item.urls.full}
+                name={item.slug}
+                likes={item.likes}
+              />
+            );
           })}
         </View>
       )}
@@ -57,9 +67,7 @@ const Feed = () => {
           justifyContent: 'center',
         }}>
         {page > 1 && (
-          <TouchableOpacity
-            onPress={handlePrev}
-            style={feedStyles.loadButton}>
+          <TouchableOpacity onPress={handlePrev} style={feedStyles.loadButton}>
             <Text style={{color: '#fff'}}>Prev</Text>
           </TouchableOpacity>
         )}
@@ -86,13 +94,14 @@ const feedStyles = StyleSheet.create({
     marginRight: 5,
     marginLeft: 5,
     alignSelf: 'center',
-    // width: '85%',
-    height: 50,
+    height: 40,
     width: 100,
     backgroundColor: 'grey',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: colors.subBg2,
+    borderRadius: 5,
   },
 });
 

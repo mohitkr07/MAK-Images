@@ -4,30 +4,18 @@ import {View, ScrollView, Text} from 'react-native';
 import ImgCard from './cards/ImgCard';
 
 import axios from 'axios';
+import {colors} from '../constants/color';
 
 const Search = ({route, navigation}) => {
-    
   const {Param} = route.params;
 
   const [data, setData] = useState();
   const [page, setPage] = useState(1);
+  const scrollTopRef = useRef();
 
-
-    // const [query, setQuery] = useState(Param);
-
-    // useEffect(() => {
-    //   setQuery(Param);
-    // }, [page, Param]);
-
-    // useEffect(() => {
-    //   if (query) {
-    //     FetchData(page, query);
-    //   }
-    // }, [page, query]);
-
-    useEffect(()=>{
-        FetchData(page, Param);
-    },[page, Param])
+  useEffect(() => {
+    FetchData(page, Param);
+  }, [page, Param]);
 
   const FetchData = async (currPage, search) => {
     try {
@@ -47,6 +35,7 @@ const Search = ({route, navigation}) => {
   const handleLoadMore = () => {
     console.log('load more clicked');
     setPage(page + 1);
+    scrollTopRef.current.scrollTo({y: 0, animated: true});
   };
   const handlePrev = () => {
     console.log('load more clicked');
@@ -54,7 +43,9 @@ const Search = ({route, navigation}) => {
   };
 
   return (
-    <ScrollView>
+    <ScrollView
+      style={{backgroundColor: colors.bodyBackground}}
+      ref={scrollTopRef}>
       {data && (
         <View style={feedStyles.container}>
           {data.map((item, index) => {
@@ -64,6 +55,7 @@ const Search = ({route, navigation}) => {
                 URL={item.urls.regular}
                 download={item.urls.full}
                 name={item.slug}
+                likes={item.likes}
               />
             );
           })}
@@ -105,13 +97,14 @@ const feedStyles = StyleSheet.create({
     marginRight: 5,
     marginLeft: 5,
     alignSelf: 'center',
-    // width: '85%',
-    height: 50,
+    height: 40,
     width: 100,
     backgroundColor: 'grey',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: colors.subBg2,
+    borderRadius: 5,
   },
 });
 
