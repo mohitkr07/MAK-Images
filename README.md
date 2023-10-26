@@ -100,4 +100,5 @@ Run the below command in order to bundle the application and run on physical or 
 ## Authors
 
 - [@mohitkr07](https://www.github.com/mohitkr07)
-
+- Name: Mohitkumar Mahto
+- email: mo2002it@gmail.com
